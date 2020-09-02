@@ -4,7 +4,7 @@ Idiomatic kotlin preconditions for spring boot Restful API's
 ##### Express API preconditions idiomatically
 
 With `requireKt` you can substitute existing `if` `else` blocks and that handle controller
-validations with a `require` function that automatically throws the API error if a 
+validations with a `require` function that automatically throws an API error if a 
 condition is not satisfied.
 
 ```kotlin
