@@ -15,9 +15,6 @@ class UserController() {
     companion object ErrorCodes {
         const val INVALID_USERNAME = "invalid username"
         const val PASSWORDS_DO_NOT_MATCH = "passwords do not match"
-        const val PASSWORDS_IS_TOO_SHORT = "password too short"
-        const val ADMIN_WITH_ID_NOT_FOUND = "admin with id not found"
-        const val ADMIN_WITH_USERNAME_NOT_FOUND = "Your credentials are wrong"
     }
 
     @PostMapping(
