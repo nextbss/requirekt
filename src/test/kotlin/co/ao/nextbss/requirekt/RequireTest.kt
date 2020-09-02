@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext
 @ActiveProfiles("test")
 @ComponentScan(basePackages = [])
 @AutoConfigureMockMvc
-class RequireTest(
+internal class RequireTest(
     @Autowired val context: WebApplicationContext,
     @Autowired var mockMvc: MockMvc
 ) {
