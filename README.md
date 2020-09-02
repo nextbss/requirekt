@@ -1,6 +1,10 @@
 # requirekt
 Idiomatic kotlin preconditions for spring boot Restful API's
 
+[![](https://jitpack.io/v/nextbss/requirekt.svg)](https://jitpack.io/#nextbss/requirekt)
+
+[![](https://img.shields.io/badge/nextbss-opensource-blue.svg)](https://www.nextbss.co.ao)
+
 ##### Express API preconditions idiomatically
 
 With `requireKt` you can substitute existing `if` `else` blocks and that handle controller
@@ -77,6 +81,52 @@ This will return the following JSON error:
          "message":"Access forbidden. You are not allowed to administrate categories."
       }
    ]
+}
+```
+
+Usage
+---------------
+
+### Download
+To get a Git project into your build:
+
+Step 1. Add the JitPack repository to your build file
+
+maven
+```xml
+<repositories>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+
+gradle
+```xml
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+Step 2. Add the dependency
+
+maven 
+```xml
+<dependency>
+	<groupId>com.github.nextbss</groupId>
+	<artifactId>requirekt</artifactId>
+	<version>v1.0.0</version>
+</dependency>
+```
+
+gradle
+```xml
+dependencies {
+    implementation 'com.github.nextbss:requirekt:v1.0.0'
 }
 ```
 
