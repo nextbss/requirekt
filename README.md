@@ -7,9 +7,11 @@ Idiomatic kotlin preconditions for spring boot Restful API's
 
 ##### Express API preconditions idiomatically
 
-With `requireKt` you can substitute existing `if` `else` blocks and that handle controller
+With `requireKt` you can substitute existing `if` `else` blocks that handle controller
 validations with a `require` function that automatically throws an API error if a 
 condition is not satisfied.
+
+This library was designed primarily for doing parameter validation in methods and constructors.
 
 ```kotlin
 @RestController
@@ -119,14 +121,14 @@ maven
 <dependency>
 	<groupId>com.github.nextbss</groupId>
 	<artifactId>requirekt</artifactId>
-	<version>v1.0.0</version>
+	<version>1.0.0</version>
 </dependency>
 ```
 
 gradle
 ```xml
 dependencies {
-    implementation 'com.github.nextbss:requirekt:v1.0.0'
+    implementation 'com.github.nextbss:requirekt:1.0.0'
 }
 ```
 
