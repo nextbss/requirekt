@@ -1,4 +1,4 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
 import org.springframework.http.HttpStatus
 
@@ -29,8 +29,7 @@ inline fun require(value: Boolean, httpStatus: HttpStatus, lazyMessage: () -> An
  */
 inline fun require(value: Boolean, status: HttpStatus, errorCode: String, lazyMessage: () -> Any) {
     if (!value) {
-        throw ApiException(
-            ErrorViewModel.singleJSON(
+        throw ApiException(ErrorViewModel.singleJSON(
                 status,
                 errorCode,
                 lazyMessage().toString()
