@@ -1,4 +1,4 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName

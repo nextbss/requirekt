@@ -1,4 +1,4 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

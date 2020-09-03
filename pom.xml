@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>co.ao.nextbss.requirekt</groupId>
+    <groupId>ao.co.nextbss.requirekt</groupId>
     <artifactId>requirekt</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
