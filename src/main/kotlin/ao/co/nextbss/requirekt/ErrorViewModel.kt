@@ -4,9 +4,9 @@ import co.ao.nextbss.Yoru
 import org.springframework.http.HttpStatus
 
 class ErrorViewModel(
-    private var status: Int,
-    private var code: String,
-    private var message: String
+    var status: Int,
+    var code: String,
+    var message: String
 )  {
 
     init {
