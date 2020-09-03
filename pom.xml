@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>co.ao.nextbss.requirekt requirekt</name>
+    <name>ao.co.nextbss.requirekt requirekt</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
