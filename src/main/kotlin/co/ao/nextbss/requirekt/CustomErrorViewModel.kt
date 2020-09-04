@@ -1,18 +1,16 @@
 package co.ao.nextbss.requirekt
 
-import java.util.*
+import java.util.ArrayList
 
-class CustomCustomErrorViewModel(val status: Int = 0,
-                                 val code: String? = null,
-                                 val message: String? = null,
-                                 val type: String? = null): CustomErrorResponse {
+class CustomErrorViewModel(val status: Int = 0,
+                           val code: String? = null,
+                           val message: String? = null,
+                           val type: String? = null): CustomErrorResponse {
 
     override fun toJSON(): String {
-        val args = this::class.java.declaredFields
-        args.iterator().forEach { print(it.type) }
-        val errorViewModel = CustomCustomErrorViewModel(status, code, message, type)
-        val viewModels = ArrayList<CustomErrorResponse>()
-        viewModels.add(errorViewModel)
-        return ErrorWrapper(viewModels).toJsonString()
+        val error = CustomErrorViewModel(status, code, message, type)
+        val list = ArrayList<CustomErrorResponse>()
+        list.add(error)
+        return ErrorWrapper(list).toJsonString()
     }
 }
