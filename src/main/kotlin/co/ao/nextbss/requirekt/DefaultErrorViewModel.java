@@ -3,12 +3,12 @@ package co.ao.nextbss.requirekt;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
-public class CustomErrorViewModel implements CustomErrorResponse {
+public class DefaultErrorViewModel implements CustomErrorResponse {
     private final int status;
     private final String code;
     private final String message;
 
-    public CustomErrorViewModel(int status, String code, String message) {
+    public DefaultErrorViewModel(int status, String code, String message) {
         this.status = status;
         this.code = code;
         this.message = message;
@@ -29,9 +29,9 @@ public class CustomErrorViewModel implements CustomErrorResponse {
     @NotNull
     @Override
     public String toJSON() {
-        CustomErrorViewModel errorViewModel = new CustomErrorViewModel(status, code, message);
-        ArrayList<CustomErrorResponse> viewModels = new ArrayList<>();
-        viewModels.add(errorViewModel);
-        return new ErrorWrapper(viewModels).toJsonString();
+        DefaultErrorViewModel error = new DefaultErrorViewModel(status, code, message);
+        ArrayList<CustomErrorResponse> list = new ArrayList<>();
+        list.add(error);
+        return new ErrorWrapper(list).toJsonString();
     }
 }
