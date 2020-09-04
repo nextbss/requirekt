@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @ComponentScan(basePackages = [])
-open class Pickup {
+open class CustomErrorBeanFinder {
     @Autowired
     lateinit var customErrors: List<CustomErrorResponse>
 }
