@@ -3,7 +3,7 @@ package co.ao.nextbss.requirekt;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
-public class DefaultErrorViewModel implements CustomErrorResponse {
+public class DefaultErrorViewModel implements ErrorResponse {
     private final int status;
     private final String code;
     private final String message;
@@ -30,7 +30,7 @@ public class DefaultErrorViewModel implements CustomErrorResponse {
     @Override
     public String toJSON() {
         DefaultErrorViewModel error = new DefaultErrorViewModel(status, code, message);
-        ArrayList<CustomErrorResponse> list = new ArrayList<>();
+        ArrayList<ErrorResponse> list = new ArrayList<>();
         list.add(error);
         return new ErrorWrapper(list).toJsonString();
     }

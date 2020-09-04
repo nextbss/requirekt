@@ -25,7 +25,7 @@ inline fun require(value: Boolean, vararg args: Array<*>, lazyMessage: () -> Any
         // If a custom package exists load it
         // We might possibly only be able to load one custom error per project
         // Since we will only have one custom require function
-        val func = ::CustomErrorViewModel
+        val func = ::ErrorViewModel
         val x = func.call(403, "104", lazyMessage().toString(), "authentication",)
         throw ApiException(
            x.toJSON(),

@@ -4,13 +4,13 @@ import co.ao.nextbss.Yoru;
 import java.util.List;
 
 public class ErrorWrapper {
-    private final List<CustomErrorResponse> errors;
+    private final List<ErrorResponse> errors;
 
-    public ErrorWrapper(List<CustomErrorResponse> errors) {
+    public ErrorWrapper(List<ErrorResponse> errors) {
         this.errors = errors;
     }
 
-    public List<CustomErrorResponse> getErrors() {
+    public List<ErrorResponse> getErrors() {
         return errors;
     }
 

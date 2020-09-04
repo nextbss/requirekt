@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 @Component
-annotation class CustomErrorResponse(
+annotation class ErrorResponse(
 
 )
