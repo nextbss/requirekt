@@ -3,6 +3,8 @@ package co.ao.nextbss.requirekt
 import co.ao.nextbss.requirekt.annotation.ErrorResponse
 
 @ErrorResponse
-interface ErrorResponse {
-    fun toJSON(): String
+abstract class ErrorResponse {
+    open fun toJSON(): String {
+        return ErrorWrapper().toJsonString(this)
+    }
 }
