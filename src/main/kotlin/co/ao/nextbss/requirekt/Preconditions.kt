@@ -3,8 +3,11 @@ package co.ao.nextbss.requirekt
 import org.springframework.beans.BeansException
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
+import org.springframework.core.SpringProperties
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
+import java.lang.IllegalStateException
+import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 
@@ -25,30 +28,45 @@ inline fun require(value: Boolean, lazyMessage: () -> Any) {
 
 
 
-fun fromArrayList(vararg args: Any): ArrayList<Any> {
-    return arrayListOf(args)
-}
-
-inline fun require(value: Boolean, vararg args: ArrayList<Any>) {
+inline fun require(value: Boolean, vararg args: ArrayList<Any>,) {
+    val logger: Logger = Logger.getLogger("Preconditions")
     if (!value) {
-        // Todo: Check if a custom error exists in the consumers base package
-        // If a custom package exists load it
-        // We might possibly only be able to load one custom error per project
-        // Since we will only have one custom require function
-
         val customErrorBeanFinder = SpringContext.getBean(CustomErrorBeanFinder::class.java)
         val errors: List<AbstractErrorResponse> = customErrorBeanFinder.errors
+        logger.info { "Number of error types found: ${errors.size} " }
+        errors.forEach { println(it.javaClass.canonicalName) }
 
-        val nameOfCustomClassToInstantiate = errors[0].javaClass.canonicalName
+        val filteredListOfCustomErrors = errors.filterNot {
+            it.javaClass.canonicalName == "co.ao.nextbss.requirekt.DefaultErrorViewModel"
+                || it.javaClass.canonicalName == "co.ao.nextbss.requirekt.ErrorResponse"
+                || it.javaClass.canonicalName == "co.ao.nextbss.requirekt.ErrorResponse"
+        }
 
-        println(nameOfCustomClassToInstantiate)
+        logger.info { "Number of filtered error types found: ${filteredListOfCustomErrors.size}" }
 
-        val klazz: AbstractErrorResponse = Class.forName(nameOfCustomClassToInstantiate)
+        filteredListOfCustomErrors.forEach { println(it.javaClass.canonicalName) }
+
+        val nameOfCustomClassToInstantiate = if (customErrorBeanFinder.environment.activeProfiles.contains("test")) {
+              filteredListOfCustomErrors[0].javaClass.canonicalName
+        } else {
+            try {
+                filteredListOfCustomErrors[1].javaClass.canonicalName
+            } catch (e: IndexOutOfBoundsException) {
+                throw IllegalStateException("No CustomError added. Add a Custom Error that subclasses AbstractErrorResponse and annotate it with @ErrorResponse")
+            }
+        }
+
+        logger.info("Canonical name of class that will instantiated as a custom error: $nameOfCustomClassToInstantiate")
+
+        val customError: AbstractErrorResponse = Class.forName(nameOfCustomClassToInstantiate)
             .getDeclaredConstructor().newInstance() as AbstractErrorResponse
 
         throw ApiException(
-            klazz.toJSON(*args),
-            HttpStatus.FORBIDDEN
+            customError.toJSON(*args),
+            Any().getValueFromIndexAsInt(
+                0,
+                args
+            )
         )
     }
 }
@@ -65,7 +83,7 @@ inline fun require(value: Boolean, httpStatus: HttpStatus, lazyMessage: () -> An
                 "",
                 lazyMessage().toString()
             ).toJSON(),
-            httpStatus)
+            httpStatus.value())
     }
 }
 
@@ -81,7 +99,7 @@ inline fun require(value: Boolean, status: HttpStatus, errorCode: String, lazyMe
                 errorCode,
                 lazyMessage().toString()
             ).toJSON(),
-            status)
+            status.value())
     }
 }
 
@@ -90,20 +108,12 @@ inline fun require(value: Boolean, status: HttpStatus, errorCode: String, lazyMe
 class SpringContext : ApplicationContextAware {
     @Throws(BeansException::class)
     override fun setApplicationContext(context: ApplicationContext?) {
-
-        // store ApplicationContext reference to access required beans later on
         Companion.context = context
     }
 
     companion object {
         private var context: ApplicationContext? = null
 
-        /**
-         * Returns the Spring managed bean instance of the given class type if it exists.
-         * Returns null otherwise.
-         * @param beanClass
-         * @return
-         */
         fun <T : Any?> getBean(beanClass: Class<T>?): T {
             return context!!.getBean(beanClass)
         }
