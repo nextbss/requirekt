@@ -10,7 +10,7 @@ class AAACustomErrorViewModel(
     var type: String? = null): AbstractErrorResponse() {
 
     override fun toJSON(vararg args: ArrayList<Any>): String {
-        status = getValueFromIndexAsInt(0, args)
+        status = fromArgsAsInt(0, args)
         code = fromArgsAsString(1, args)
         message = fromArgsAsString(2, args)
         type = fromArgsAsString(3, args)

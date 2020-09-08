@@ -63,7 +63,7 @@ inline fun require(value: Boolean, vararg args: ArrayList<Any>,) {
 
         throw ApiException(
             customError.toJSON(*args),
-            getValueFromIndexAsInt(
+            fromArgsAsInt(
                 0,
                 args
             )
