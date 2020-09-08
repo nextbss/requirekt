@@ -45,7 +45,8 @@ class RestApiController {
     fun custom(): ResponseEntity<Any> {
         require(value = false,
             arrayListOf(
-                HttpStatus.FORBIDDEN.value(), "104",
+                HttpStatus.FORBIDDEN.value(),
+                "104",
                 "Access forbidden. You are not allowed to administrate categories.",
                 "authentication"
             )
