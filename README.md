@@ -91,7 +91,7 @@ requirekt supports custom error responses in JSON using the
 `require(value: Boolean, vararg args: ArrayList<Any>)` function.
 
 To use this function add a custom error with the `@ErrorResponse` annotation
-and override the `toJSON` function from `AbstractErrorResponse`:
+and override the `toJSON` function from `AbstractErrorResponse`
 
 Example:
 
@@ -114,6 +114,7 @@ class CustomErrorViewModel(val status: Int = 0,
 
 NOTE: `fromArgsAsInt`, `fromArgsAsFloat` and `fromArgsAsString` are convenience functions
  that help your custom error class get the required arguments passed to the `JSON()` function.
+ 
 
 Call the `require` function and pass a boolean to validate and, your arguments wrapped in 
 `arrayListOf` in the same order as the constructor of your custom error response class. 
@@ -129,6 +130,19 @@ require(value = false,
          "authentication"
     )
 )
+```
+
+Also make sure `requireKt` can scan for custom error classes by adding
+`@SpringBootApplication(scanBasePackages = ["YOUR_PACKAGE", "ao.co.nextbss.requirekt"])`
+ to your spring boot application entry point:
+ 
+```kotlin
+    @Configuration
+    @SpringBootApplication(scanBasePackages = ["YOUR_APPLICATION_PACKAGE", "ao.co.nextbss.requirekt"])
+    class YourApplication
+    fun main(args: Array<String>) {
+        runApplication<YourApplication>(*args)
+    }
 ```
 
 The output would than be the following:
