@@ -10,14 +10,15 @@ class CustomErrorViewModel(
     var type: String? = null): AbstractErrorResponse() {
 
     override fun toJSON(vararg args: ArrayList<Any>): String {
-        status = args[0][0] as Int
-
-        code = args[0][1] as String
-
-        message = args[0][2] as String
-
-        type = args[0][3] as String
-
+        status = getValueFromIndexAsInt(0, args)
+        code = getValueFromIndexAsString(1, args)
+        message = getValueFromIndexAsString(2, args)
+        type = getValueFromIndexAsString(3, args)
         return super.toJSON()
     }
+
+
 }
+
+
+
