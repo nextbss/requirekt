@@ -59,8 +59,8 @@ require(MessageParser.parse(message) == true) {
 }
 ```
 
-#### Customized error response
-You can custom the error response by passing in additional arguments.
+#### Pass additional arguments
+You can change the response by passing in additional arguments.
 Namely `status` which requires a parameter of type `HttpStatus` and `code` which 
 is a `String` that represents the API error code.
 
@@ -83,6 +83,64 @@ This will return the following JSON error:
          "message":"Access forbidden. You are not allowed to administrate categories."
       }
    ]
+}
+```
+
+#### Custom Error Responses
+requirekt supports custom error responses in JSON using the 
+`require(value: Boolean, vararg args: ArrayList<Any>)` function.
+
+To use this function add a custom error with the `@ErrorResponse` annotation
+and override the `toJSON` function from `AbstractErrorResponse`:
+
+Example:
+
+```kotlin
+@ErrorResponse
+class CustomErrorViewModel(val status: Int = 0,
+                           val code: String? = null,
+                           val message: String? = null,
+                           val type: String? = null): AbstractErrorResponse() {
+
+    override fun toJSON(vararg args: ArrayList<Any>): String {
+        status = fromArgsAsInt(0, args)
+        code = fromArgsAsString(1, args)
+        message = fromArgsAsString(2, args)
+        type = fromArgsAsString(3, args)
+        return super.toJSON()
+    }
+}
+```
+
+NOTE: `fromArgsAsInt`, `fromArgsAsFloat` and `fromArgsAsString` are convenience functions
+ that help your custom error class get the required arguments passed to the `JSON()` function.
+
+Call the `require` function and pass a boolean to validate and, your arguments wrapped in 
+`arrayListOf` in the same order as the constructor of your custom error response class. 
+If they are not in the same order and of the same type, require will fail to create the custom
+error response in JSON.
+
+```kotlin
+require(value = false,
+    arrayListOf(
+         HttpStatus.FORBIDDEN.value(),
+         "104",
+         "Access forbidden. You are not allowed to administrate categories.",
+         "authentication"
+    )
+)
+```
+
+The output would than be the following:
+
+```json
+{
+  "errors" : [ {
+    "status" : 403,
+    "code" : "104",
+    "message" : "Access forbidden. You are not allowed to administrate categories.",
+    "type" : "authentication"
+  } ]
 }
 ```
 
@@ -121,14 +179,14 @@ maven
 <dependency>
 	<groupId>com.github.nextbss</groupId>
 	<artifactId>requirekt</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 </dependency>
 ```
 
 gradle
 ```xml
 dependencies {
-    implementation 'com.github.nextbss:requirekt:1.0.0'
+    implementation 'com.github.nextbss:requirekt:1.1.0'
 }
 ```
 

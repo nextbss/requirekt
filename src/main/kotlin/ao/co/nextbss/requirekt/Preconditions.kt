@@ -28,7 +28,7 @@ inline fun require(value: Boolean, lazyMessage: () -> Any) {
 /**
  * Throws an [ApiException] for a CustomError with the result of [args] if the [value] is false
  */
-inline fun require(value: Boolean, vararg args: ArrayList<Any>,) {
+inline fun require(value: Boolean, vararg args: ArrayList<Any>) {
     val logger: Logger = Logger.getLogger("Preconditions")
     if (!value) {
         val customErrorBeanFinder = SpringContext.getBean(CustomErrorBeanFinder::class.java)
