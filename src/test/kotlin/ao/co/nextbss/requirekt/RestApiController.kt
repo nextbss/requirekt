@@ -38,7 +38,19 @@ class RestApiController {
         require(false) {
             "Message is invalid"
         }
+        return ResponseEntity.ok().build()
+    }
 
+    @PostMapping("/xHrFuz/transfer")
+    fun custom(): ResponseEntity<Any> {
+        require(value = false,
+            arrayListOf(
+                HttpStatus.FORBIDDEN.value(),
+                "104",
+                "Access forbidden. You are not allowed to administrate categories.",
+                "authentication"
+            )
+        )
         return ResponseEntity.ok().build()
     }
 }

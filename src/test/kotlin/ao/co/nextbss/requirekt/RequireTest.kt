@@ -88,4 +88,27 @@ internal class RequireTest(
                 .jsonPath("$.['errors'].[0].['code']")
                 .value(""))
     }
+
+    @Test
+    @DisplayName("It Should Return custom error response in json")
+    fun itShouldReturnCustomErrorResponse() {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/messages/xHrFuz/transfer"))
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isForbidden)
+            .andExpect(
+                MockMvcResultMatchers
+                    .jsonPath("$.['errors'].[0].['message']")
+                    .value("Access forbidden. You are not allowed to administrate categories."))
+            .andExpect(
+                MockMvcResultMatchers
+                    .jsonPath("$.['errors'].[0].['code']")
+                    .value("104"))
+            .andExpect(
+                MockMvcResultMatchers
+                    .jsonPath("$.['errors'].[0].['type']")
+                    .value("authentication"))
+            .andExpect(MockMvcResultMatchers
+                .jsonPath("$.['errors'].[0].['status']")
+                .value("403"))
+    }
 }
