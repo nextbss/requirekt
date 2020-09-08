@@ -16,8 +16,6 @@ class CustomErrorViewModel(
         type = getValueFromIndexAsString(3, args)
         return super.toJSON()
     }
-
-
 }
 
 
