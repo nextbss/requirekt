@@ -43,9 +43,13 @@ class RestApiController {
 
     @PostMapping("/xHrFuz/transfer")
     fun custom(): ResponseEntity<Any> {
-        require(value = false, arrayOf(HttpStatus.FORBIDDEN.value(), "104", "authentication")) {
-            "Access forbidden. You are not allowed to administrate categories."
-        }
+        require(value = false,
+            arrayListOf(
+                HttpStatus.FORBIDDEN.value(), "104",
+                "Access forbidden. You are not allowed to administrate categories.",
+                "authentication"
+            )
+        )
         return ResponseEntity.ok().build()
     }
 }

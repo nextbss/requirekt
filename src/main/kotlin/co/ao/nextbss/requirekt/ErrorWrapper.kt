@@ -2,10 +2,10 @@ package co.ao.nextbss.requirekt
 
 import co.ao.nextbss.Yoru
 
-class ErrorWrapper {
-    val errors = ArrayList<ErrorResponse>()
+open class ErrorWrapper {
+    val errors = ArrayList<AbstractErrorResponse>()
 
-    fun toJsonString(error: ErrorResponse): String {
+    fun toJsonString(error: AbstractErrorResponse): String {
         errors.add(error)
         return Yoru<ErrorWrapper>().toJson(this)
     }

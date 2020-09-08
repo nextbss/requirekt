@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component
 @Component
 @ComponentScan(basePackages = [])
 open class CustomErrorBeanFinder {
-
-    lateinit var errors: List<ErrorResponse>
+    @Autowired
+    lateinit var errors: List<AbstractErrorResponse>
 }

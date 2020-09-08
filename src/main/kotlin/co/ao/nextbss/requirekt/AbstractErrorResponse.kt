@@ -1,9 +1,8 @@
 package co.ao.nextbss.requirekt
 
-import co.ao.nextbss.requirekt.annotation.ErrorResponse
+import co.ao.nextbss.requirekt.interfaces.Converter
 
-@ErrorResponse
-open class ErrorResponse: AbstractErrorResponse() {
+abstract class AbstractErrorResponse: Converter {
     override fun toJSON(vararg args: ArrayList<Any>): String {
         return ErrorWrapper().toJsonString(this)
     }
