@@ -1,4 +1,4 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
 fun getValueFromIndex(index: Int, args: Array<out ArrayList<Any>>): Any {
     return args[0][index]

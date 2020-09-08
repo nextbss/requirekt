@@ -1,4 +1,4 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.ComponentScan

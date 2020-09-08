@@ -1,5 +1,6 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
+import ao.co.nextbss.requirekt.AbstractErrorResponse
 import co.ao.nextbss.requirekt.annotation.ErrorResponse
 
 @ErrorResponse

@@ -1,4 +1,4 @@
-package co.ao.nextbss.requirekt
+package ao.co.nextbss.requirekt
 
 import org.springframework.beans.BeansException
 import org.springframework.context.ApplicationContext
@@ -37,9 +37,9 @@ inline fun require(value: Boolean, vararg args: ArrayList<Any>,) {
         errors.forEach { println(it.javaClass.canonicalName) }
 
         val filteredListOfCustomErrors = errors.filterNot {
-            it.javaClass.canonicalName == "co.ao.nextbss.requirekt.DefaultErrorViewModel"
-                || it.javaClass.canonicalName == "co.ao.nextbss.requirekt.ErrorResponse"
-                || it.javaClass.canonicalName == "co.ao.nextbss.requirekt.ErrorResponse"
+            it.javaClass.canonicalName == "ao.co.nextbss.requirekt.DefaultErrorViewModel"
+                || it.javaClass.canonicalName == "ao.co.nextbss.requirekt.ErrorResponse"
+                || it.javaClass.canonicalName == "ao.co.nextbss.requirekt.ErrorResponse"
         }
 
         logger.info { "Number of filtered error types found: ${filteredListOfCustomErrors.size}" }
@@ -100,21 +100,5 @@ inline fun require(value: Boolean, status: HttpStatus, errorCode: String, lazyMe
                 lazyMessage().toString()
             ).toJSON(),
             status.value())
-    }
-}
-
-@Component
-class SpringContext : ApplicationContextAware {
-    @Throws(BeansException::class)
-    override fun setApplicationContext(context: ApplicationContext?) {
-        Companion.context = context
-    }
-
-    companion object {
-        private var context: ApplicationContext? = null
-
-        fun <T : Any?> getBean(beanClass: Class<T>?): T {
-            return context!!.getBean(beanClass)
-        }
     }
 }
