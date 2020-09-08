@@ -5,10 +5,27 @@
 
     <groupId>ao.co.nextbss.requirekt</groupId>
     <artifactId>requirekt</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>ao.co.nextbss.requirekt requirekt</name>
+
+    <developers>
+        <developer>
+            <name>Alexandre Antonio Juca</name>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+            <email>alexandre.juca@nextbss.co.ao</email>
+        </developer>
+        <developer>
+            <name>Sergio Maziano</name>
+            <roles>
+                <role>Senior Software Engineer</role>
+            </roles>
+            <email>sergio@nextbss.co.ao</email>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +34,7 @@
         <kotlin.code.style>official</kotlin.code.style>
         <maven.test.skip>false</maven.test.skip>
     </properties>
+
 
     <dependencyManagement>
         <dependencies>
