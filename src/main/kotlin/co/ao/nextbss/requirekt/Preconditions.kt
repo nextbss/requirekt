@@ -10,7 +10,6 @@ import java.lang.IllegalStateException
 import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
-
 /**
  * Throws an [ApiException] with the result of calling [lazyMessage] if the [value] is false.
  * Note: HttpStatus is [Bad_REQUEST] by default.
@@ -25,8 +24,6 @@ inline fun require(value: Boolean, lazyMessage: () -> Any) {
             ).toJSON())
     }
 }
-
-
 
 inline fun require(value: Boolean, vararg args: ArrayList<Any>,) {
     val logger: Logger = Logger.getLogger("Preconditions")
@@ -102,7 +99,6 @@ inline fun require(value: Boolean, status: HttpStatus, errorCode: String, lazyMe
             status.value())
     }
 }
-
 
 @Component
 class SpringContext : ApplicationContextAware {
