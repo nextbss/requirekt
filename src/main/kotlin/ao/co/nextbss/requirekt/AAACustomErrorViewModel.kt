@@ -11,9 +11,9 @@ class AAACustomErrorViewModel(
 
     override fun toJSON(vararg args: ArrayList<Any>): String {
         status = getValueFromIndexAsInt(0, args)
-        code = getValueFromIndexAsString(1, args)
-        message = getValueFromIndexAsString(2, args)
-        type = getValueFromIndexAsString(3, args)
+        code = fromArgsAsString(1, args)
+        message = fromArgsAsString(2, args)
+        type = fromArgsAsString(3, args)
         return super.toJSON()
     }
 }
