@@ -3,7 +3,7 @@ package co.ao.nextbss.requirekt
 import co.ao.nextbss.requirekt.annotation.ErrorResponse
 
 @ErrorResponse
-class CustomErrorViewModel(
+class AAACustomErrorViewModel(
     var status: Int = 0,
     var code: String? = null,
     var message: String? = null,
